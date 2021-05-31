@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DefaultCompletionName</key>
+	<string>MVVM</string>
+	<key>Description</key>
+	<string>Copy right: Newwave Solution</string>
+	<key>Kind</key>
+	<string>Xcode.IDEKit.TextSubstitutionFileTemplateKind</string>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Description</key>
+			<string>The name of the scene to create</string>
+			<key>Identifier</key>
+			<string>sceneName</string>
+			<key>Name</key>
+			<string>TableViewCell Name:</string>
+			<key>NotPersisted</key>
+			<true/>
+			<key>Required</key>
+			<true/>
+			<key>Type</key>
+			<string>text</string>
+		</dict>
+		<dict>
+			<key>Default</key>
+			<string>___VARIABLE_sceneName:identifier___</string>
+			<key>Identifier</key>
+			<string>productName</string>
+			<key>Type</key>
+			<string>static</string>
+		</dict>
+		<dict>
+			<key>Default</key>
+			<string>___VARIABLE_sceneName:identifier___TableViewCell</string>
+			<key>Description</key>
+			<string>The view controller name</string>
+			<key>Identifier</key>
+			<string>cellName</string>
+			<key>Name</key>
+			<string>Cell Name:</string>
+			<key>Required</key>
+			<true/>
+			<key>Type</key>
+			<string>static</string>
+		</dict>
+		<dict>
+			<key>Default</key>
+			<string>___VARIABLE_sceneName:identifier___CellViewModel</string>
+			<key>Description</key>
+			<string>The viewModel name</string>
+			<key>Identifier</key>
+			<string>cellViewModelName</string>
+			<key>Name</key>
+			<string>CellViewModel Name:</string>
+			<key>Required</key>
+			<true/>
+			<key>Type</key>
+			<string>static</string>
+		</dict>
+		<dict>
+			<key>Default</key>
+			<string>UITableViewCell</string>
+			<key>Description</key>
+			<string>What view controller class to subclass for the new scene</string>
+			<key>FallbackHeader</key>
+			<string>#import &lt;UIKit/UIKit.h&gt;</string>
+			<key>Identifier</key>
+			<string>tableViewCellSubclass</string>
+			<key>Name</key>
+			<string>Subclass of:</string>
+			<key>NotPersisted</key>
+			<true/>
+			<key>Required</key>
+			<string>YES</string>
+			<key>Type</key>
+			<string>class</string>
+			<key>Values</key>
+			<array>
+				<string>UITableViewCell</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>WithXIBfile</string>
+			<key>Name</key>
+			<string>Also create a XIB file</string>
+			<key>Description</key>
+			<string>Whether to create a XIB file with the same name</string>
+			<key>Type</key>
+			<string>checkbox</string>
+			<key>RequiredOptions</key>
+			<dict>
+				<key>viewType</key>
+				<array>
+					<string>XIB file</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>Platforms</key>
+	<array>
+		<string>com.apple.platform.iphoneos</string>
+	</array>
+	<key>SortOrder</key>
+	<string>0</string>
+	<key>Summary</key>
+	<string>This generates a new scene using Uncle Bob&apos;s clean architecture.</string>
+</dict>
+</plist>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="___FILEBASENAMEASIDENTIFIER___" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgg-pS-lOp">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BM9-Nd-1d3">
+                            <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Newwave Solution" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tf7-Je-md9">
+                                    <rect key="frame" x="127.5" y="0.0" width="159" height="44"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="Tf7-Je-md9" secondAttribute="bottom" id="NgJ-g6-VXA"/>
+                                <constraint firstItem="Tf7-Je-md9" firstAttribute="centerX" secondItem="BM9-Nd-1d3" secondAttribute="centerX" id="QPA-c2-WTq"/>
+                                <constraint firstItem="Tf7-Je-md9" firstAttribute="top" secondItem="BM9-Nd-1d3" secondAttribute="top" id="SvB-y3-5tE"/>
+                                <constraint firstAttribute="height" constant="44" id="tkx-5o-lkQ"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="BM9-Nd-1d3" firstAttribute="leading" secondItem="hgg-pS-lOp" secondAttribute="leading" id="G84-n3-Dkd"/>
+                        <constraint firstAttribute="bottom" secondItem="BM9-Nd-1d3" secondAttribute="bottom" id="I0m-AJ-Oga"/>
+                        <constraint firstAttribute="trailing" secondItem="BM9-Nd-1d3" secondAttribute="trailing" id="eEk-Nj-sKy"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="hgg-pS-lOp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="0dp-1d-1r3"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hgg-pS-lOp" secondAttribute="trailing" id="WIH-BI-asD"/>
+                <constraint firstItem="hgg-pS-lOp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="oY9-NC-Dwa"/>
+                <constraint firstItem="BM9-Nd-1d3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="sL6-gu-t5l"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="132" y="140"/>
+        </view>
+    </objects>
+</document>

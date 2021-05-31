@@ -1,0 +1,44 @@
+/* 
+ Localizable.strings
+ BaseMVVM
+ 
+ Created by Lê Thọ Sơn on 4/21/20.
+ Copyright © 2020 thoson.it. All rights reserved.
+ */
+
+/* Common */
+"Common.Yes" = "Yes";
+"Common.No" = "No";
+"Common.OK" = "OK";
+"Common.Cancel" = "Cancel";
+"Common.Done" = "Done";
+"Common.Back" = "Back";
+"Common.Close" = "Close";
+"Common.Edit" = "Edit";
+"Common.Next" = "Next";
+"Common.Skip" = "Skip";
+"Common.Reset" = "Reset";
+"Common.Save" = "Save";
+"Common.Delete" = "Delete";
+"Common.Search" = "Search";
+"Common.Success" = "Success";
+"Common.Error" = "Error";
+"Common.NoResults" = "No Results";
+/* Toast */
+"Toast.ConnectionBack.Message" = "Back online";
+"Toast.ConnectionLost.Message" = "No connection";
+
+/* Common Alert*/
+"Pick.Image.Alert" = "Choose Photo";
+"Pick.Image.From.Camera" = "Camera";
+"Pick.Image.From.Gallery" = "Gallery";
+"Pick.Image.None_Permision.Alert" = "App don't have permission to access you Photo";
+"Pick.Image.None_Permision.Message" = "Open \"Setting\" and provide permission";
+
+/* Navigation */
+"Navigation.Title" = "MVVM Demo";
+
+/* Login */
+"Login.Username.Empty" = "Chưa nhập tên đăng nhập";
+"Login.Password.Empty" = "Chưa nhập mặt khẩu";
+"Login.Username.Password.Invalid" = "Tên đăng nhập hoặc mật khẩu chưa đúng";
