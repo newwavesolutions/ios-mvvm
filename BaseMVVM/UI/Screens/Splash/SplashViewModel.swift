@@ -9,15 +9,7 @@
 import Foundation
 import RxCocoa
 
-class SplashViewModel: ViewModel, ViewModelType{
-    struct Input {
-        
-    }
-    
-    struct Output {
-        
-    }
-    
+class SplashViewModel: ViewModel {
     private let navigator: SplashNavigator
     
     init(navigator: SplashNavigator) {
@@ -29,9 +21,5 @@ class SplashViewModel: ViewModel, ViewModelType{
         } else {
             navigator.pushSignIn()
         }
-    }
-    
-    func transform(input: Input) -> Output {
-        return Output()
     }
 }

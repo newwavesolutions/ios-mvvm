@@ -11,9 +11,9 @@ import RxSwift
 import RxCocoa
 import MBProgressHUD
 
-class ViewController: UIViewController {
-    var viewModel: ViewModel?
-    var navigator: Navigator?
+class ViewController<V: ViewModel, N: Navigator>: UIViewController {
+    var viewModel: V!
+    var navigator: N!
     
     let disposeBag = DisposeBag()
     
@@ -23,8 +23,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeUI()
-        bindViewModel()
+        setupUI()
+        setupListener()
     }
     
     deinit {
@@ -37,7 +37,11 @@ class ViewController: UIViewController {
         log.info("\(type(of: self)): Received Memory Warning")
     }
     
-    func makeUI() {
+    func setupUI() {
+        
+    }
+    
+    func setupListener() {
         isLoading.subscribe(onNext: {[weak self] (loading) in
             guard let self = self else { return }
             if loading {
@@ -51,13 +55,6 @@ class ViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
-    func bindViewModel() {
-        
-    }
-}
-
-// MARK: - Setup navigation
-extension ViewController {
     //Clear background
     func clearNavigationBackground() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(),

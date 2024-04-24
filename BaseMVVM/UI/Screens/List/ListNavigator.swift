@@ -10,6 +10,6 @@ import Foundation
 
 class ListNavigator: Navigator {
     func pushDetail(data: Item) {
-        
+        log.info("Should open detail screen")
     }
 }

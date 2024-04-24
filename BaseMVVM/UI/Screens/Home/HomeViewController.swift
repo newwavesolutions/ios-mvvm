@@ -9,12 +9,12 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: ViewController {
+class HomeViewController: ViewController<HomeViewModel, HomeNavigator> {
     @IBOutlet weak private var containerView: UIView!
     @IBOutlet weak var tab1Button: UIButton!
     @IBOutlet weak var tab2Button: UIButton!
     
-    private lazy var tab1VC: ViewController = {
+    private lazy var tab1VC: ListViewController = {
         let viewController = ListViewController(nibName: ListViewController.className, bundle: nil)
         let navigator = ListNavigator(with: viewController)
         let viewModel = ListViewModel(navigator: navigator)
@@ -22,7 +22,7 @@ class HomeViewController: ViewController {
         return viewController
     }()
     
-    private lazy var tab2VC: ViewController = {
+    private lazy var tab2VC: ListViewController = {
         let viewController = ListViewController(nibName: ListViewController.className, bundle: nil)
         let navigator = ListNavigator(with: viewController)
         let viewModel = ListViewModel(navigator: navigator)
@@ -30,7 +30,7 @@ class HomeViewController: ViewController {
         return viewController
     }()
     
-    var currentViewController: ViewController?
+    var currentViewController: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +41,8 @@ class HomeViewController: ViewController {
         super.viewWillAppear(animated)
     }
 
-    override func makeUI() {
-        super.makeUI()
+    override func setupUI() {
+        super.setupUI()
         setTitle("MVVM DEMO",
                  subTitle: "Newwave solution CSJ")
         showLeftButton(image: UIImage(named: "ic_menu"))
@@ -57,15 +57,19 @@ class HomeViewController: ViewController {
             self?.showTab2()
         }.disposed(by: disposeBag)
     }
-
-    override func bindViewModel() {
-        super.bindViewModel()
-        guard let viewModel = self.viewModel as? HomeViewModel else { return }
-        let menuAction = navigationItem.leftBarButtonItem!.rx.tap.asDriver()
-        let logoutAction = navigationItem.rightBarButtonItem!.rx.tap.asDriver()
-        let input = HomeViewModel.Input(menuAction: menuAction,
-                                        logoutAction: logoutAction)
-        let output = viewModel.transform(input: input)
+    
+    override func setupListener() {
+        super.setupListener()
+        
+        navigationItem.leftBarButtonItem!.rx.tap.bind { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.presentSideMenu()
+        }.disposed(by: disposeBag)
+        
+        navigationItem.rightBarButtonItem!.rx.tap.bind { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.logout()
+        }.disposed(by: disposeBag)
     }
     
     //Show list data

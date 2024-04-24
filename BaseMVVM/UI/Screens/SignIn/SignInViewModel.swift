@@ -10,21 +10,10 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-class SignInViewModel: ViewModel, ViewModelType {
-    struct Input {
-        let userName: Driver<String>
-        let password: Driver<String>
-        let loginAction: Driver<Void>
-        let signUpAction: Driver<Void>
-    }
+class SignInViewModel: ViewModel {
+    // MARK: Public Properties
     
-    struct Output {
-        
-    }
-    
-    private let userName = BehaviorRelay(value: "")
-    private let password = BehaviorRelay(value: "")
-    
+    // MARK: Private Properties
     private let navigator: SignInNavigator
     
     init(navigator: SignInNavigator) {
@@ -32,53 +21,53 @@ class SignInViewModel: ViewModel, ViewModelType {
         super.init(navigator: navigator)
     }
     
-    func transform(input: Input) -> Output {
-        input.userName.asObservable().bind(to: userName).disposed(by: disposeBag)
-        input.password.asObservable().bind(to: password).disposed(by: disposeBag)
-        input.loginAction.drive(onNext: { [weak self] _ in
-            self?.login()
-        }).disposed(by: disposeBag)
-        input.signUpAction.drive(onNext: { [weak self] _ in
-            self?.navigator.pushSignUp()
-        }).disposed(by: disposeBag)
-        return Output()
-    }
-    
-    private func login() {
-        let userName = self.userName.value
+    // MARK: Public Function
+    func signIn(userName: String, password: String) {
         if userName.isEmpty {
             navigator.showAlert(title: "Common.Error".localized(),
                                 message: "Login.Username.Empty".localized())
             return
         }
-        let password = self.password.value
         if password.isEmpty {
             navigator.showAlert(title: "Common.Error".localized(),
                                 message: "Login.Password.Empty".localized())
             return
         }
         
-        Application.shared.mockProvider.login(username: userName, password: password).trackActivity(loading).subscribe(onNext: { [weak self] token in
-            guard let self = self else { return }
-            //Save data
-            AuthManager.shared.token = token
-            self.fetchProfile()
+        Application.shared
+            .mockProvider
+            .login(username: userName, password: password)
+            .trackActivity(loadingIndicator)
+            .subscribe(onNext: { [weak self] token in
+                guard let self = self else { return }
+                //Save data
+                AuthManager.shared.token = token
+                self.fetchProfile()
             }, onError: {[weak self] error in
                 self?.navigator.showAlert(title: "Common.Error".localized(),
                                           message: "Login.Username.Password.Invalid".localized())
-        }).disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
     }
     
+    func openSignUp() {
+        navigator.pushSignUp()
+    }
+    
+    // MARK: Private Function
     private func fetchProfile() {
-        Application.shared.mockProvider.getProfile().trackActivity(loading).subscribe(onNext: { [weak self] user in
-            guard let self = self else { return }
-            //Save data
-            UserManager.shared.saveUser(user)
-            //Navigate
-            self.navigator.pushHome()
+        Application.shared
+            .mockProvider
+            .getProfile()
+            .trackActivity(loadingIndicator)
+            .subscribe(onNext: { [weak self] user in
+                guard let self = self else { return }
+                //Save data
+                UserManager.shared.saveUser(user)
+                //Navigate
+                self.navigator.pushHome()
             }, onError: {[weak self] error in
                 self?.navigator.showAlert(title: "Common.Error".localized(),
                                           message: "Login.Username.Password.Invalid".localized())
-        }).disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
     }
 }

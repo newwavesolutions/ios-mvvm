@@ -12,7 +12,7 @@ import RxSwift
 class Navigator {
     let disposeBag = DisposeBag()
     
-    weak var viewController: ViewController?
+    weak var viewController: UIViewController?
     
     lazy var navigationController: UINavigationController? = {
         return self.viewController?.navigationController
@@ -22,7 +22,7 @@ class Navigator {
         return appDelegate.topViewController()
     }()
     
-    init(with viewController: ViewController) {
+    init(with viewController: UIViewController) {
         self.viewController = viewController
     }
     
@@ -32,9 +32,9 @@ class Navigator {
     
     func showAlert(title: String?, message: String?, buttonTitles: [String]? = nil, highlightedButtonIndex: Int? = nil, completion: ((Int) -> Void)? = nil) {
         viewController?.showAlert(title: title,
-                                      message: message,
-                                      buttonTitles: buttonTitles,
-                                      highlightedButtonIndex: highlightedButtonIndex,
-                                      completion: completion)
+                                  message: message,
+                                  buttonTitles: buttonTitles,
+                                  highlightedButtonIndex: highlightedButtonIndex,
+                                  completion: completion)
     }
 }

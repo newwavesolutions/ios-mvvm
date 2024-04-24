@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SignUpViewController: ViewController {
+class SignUpViewController: ViewController<SignUpViewModel, SignUpNavigator> {
     @IBOutlet weak private var signUpButton: UIButton!
     @IBOutlet weak private var usernameTextField: UITextField!
     @IBOutlet weak private var passwordTextField: UITextField!
@@ -20,24 +20,32 @@ class SignUpViewController: ViewController {
         
     }
     
-    override func makeUI() {
-        super.makeUI()
+    override func setupUI() {
+        super.setupUI()
         setTitle("Navigation.Title".localized(), subTitle: "Newwave solution CSJ")
         showLeftButton()
         usernameTextField.text = "Lê Thọ Sơn"
         passwordTextField.text = "123456"
     }
     
-    override func bindViewModel() {
-        super.bindViewModel()
-        guard let viewModel = viewModel as? SignUpViewModel else { return }
-        let signUpAction = signUpButton.rx.tap.asDriver()
-        let username = usernameTextField.rx.text.orEmpty.asDriver()
-        let password = passwordTextField.rx.text.orEmpty.asDriver()
-        let input = SignUpViewModel.Input(userName: username,
-                                          password: password,
-                                          signUpAction: signUpAction)
-        let output = viewModel.transform(input: input)
-        viewModel.loading.asObservable().bind(to: isLoading).disposed(by: disposeBag)
+    override func setupListener() {
+        super.setupListener()
+        
+        usernameTextField.rx.text.orEmpty.bind { [weak self] text in
+            guard let self = self else { return }
+            self.viewModel.changeUserName(userName: text)
+        }.disposed(by: disposeBag)
+        
+        passwordTextField.rx.text.orEmpty.bind { [weak self] text in
+            guard let self = self else { return }
+            self.viewModel.changeUserName(userName: text)
+        }.disposed(by: disposeBag)
+        
+        signUpButton.rx.tap.bind { [weak self] text in
+            guard let self = self else { return }
+            self.viewModel.signUp()
+        }.disposed(by: disposeBag)
+        
+        viewModel.loadingIndicator.asObservable().bind(to: isLoading).disposed(by: disposeBag)
     }
 }

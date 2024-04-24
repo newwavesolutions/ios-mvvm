@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SplashViewController: ViewController {
+class SplashViewController: ViewController<SplashViewModel, SplashNavigator> {
     
     override func viewDidLoad() {
         let navigator = SplashNavigator(with: self)
@@ -28,19 +28,16 @@ class SplashViewController: ViewController {
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-    override func makeUI() {
-        super.makeUI()
+    override func setupUI() {
+        super.setupUI()
         clearNavigationBackground()
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationController?.navigationItem.hidesBackButton = true
         navigationItem.setHidesBackButton(true, animated: false)
     }
     
-    override func bindViewModel() {
-        super.bindViewModel()
-        guard let viewModel = viewModel as? SplashViewModel else {
-            return
-        }
+    override func setupListener() {
+        super.setupListener()
     }
 }
 

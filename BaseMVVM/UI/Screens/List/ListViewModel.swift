@@ -10,60 +10,48 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-class ListViewModel: ViewModel, ViewModelType {
-    struct Input {
-        let headerRefresh: Observable<Void>
-        let footerRefresh: Observable<Void>
-        let selection: Driver<ItemCellViewModel>
-    }
+class ListViewModel: ViewModel {
     
-    struct Output {
-        let items: BehaviorRelay<[ItemCellViewModel]>
-    }
+    // MARK: Public Properties
+    let cellVMs = BehaviorRelay<[ItemCellViewModel]>(value: [])
     
-    let navigator: ListNavigator
-    
-    private var page = 1
-    
+    // MARK: Private Properties
+    private let navigator: ListNavigator
     private let movies = BehaviorRelay<[Item]>(value: [])
+    private var page = 1
     
     init(navigator: ListNavigator) {
         self.navigator = navigator
         super.init(navigator: navigator)
-    }
-    
-    func transform(input: Input) -> Output {
-        //Input
-        input.headerRefresh.subscribe(onNext: { [weak self] _ in
-            guard let self = self else { return }
-            self.page = 1
-            self.fetchItems(at: self.page)
-        }).disposed(by: disposeBag)
         
-        input.footerRefresh.subscribe(onNext: { [weak self] _ in
-            guard let self = self else { return }
-            self.fetchItems(at: self.page + 1)
-        }).disposed(by: disposeBag)
-        
-        input.selection.drive(onNext: {[weak self] cellVM in
-            self?.navigator.pushDetail(data: cellVM.item)
-        }).disposed(by: disposeBag)
-        
-        //Output
-        let elements = BehaviorRelay<[ItemCellViewModel]>(value: [])
+        // Setup listener
         movies.map { movies -> [ItemCellViewModel] in
             return movies.map { movie -> ItemCellViewModel in
                 return ItemCellViewModel(item: movie)
             }
-        }.bind(to: elements).disposed(by: disposeBag)
-        return Output(
-            items: elements
-        )
+        }.bind(to: cellVMs).disposed(by: disposeBag)
     }
+    
+    // MARK: Public Function
+    
+    func reloadData() {
+        page = 1
+        fetchItems(at: self.page)
+    }
+    
+    func loadMoreData() {
+        fetchItems(at: self.page + 1)
+    }
+    
+    func handleItemTapped(cellVM: ItemCellViewModel) {
+        navigator.pushDetail(data: cellVM.item)
+    }
+    
+    // MARK: Private Function
     
     private func fetchItems(at page: Int) {
         Application.shared.apiProvider.getItems(page: page, pageSize: 20)
-            .trackActivity(page == 1 ? headerLoading : footerLoading)
+            .trackActivity(page == 1 ? loadingIndicator : ActivityIndicator())
             .subscribe(
                 onNext: { [weak self] response in
                     guard let self = self else { return }
